@@ -1,0 +1,32 @@
+version: '3'
+
+services: 
+  mongo:
+    image: mongo
+    container_name: mongo
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: MongoDB!2020
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db:/data/db
+    networks:
+      - mongo-compose-network
+
+  api:
+    build: .
+    volumes:
+      - "./server:/app"
+    ports:
+      - "3003:3003"
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    networks:
+      - mongo-compose-network
+
+networks: 
+    mongo-compose-network:
+      driver: bridge
