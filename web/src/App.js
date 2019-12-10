@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Route } from "react-router-dom";
+import { CSSTransition } from 'react-transition-group'
 
 import './scss/App.scss';
 import LaunchScreen from './LaunchScreen';
@@ -10,6 +11,7 @@ import NotesContent from './components/notes-content';
 import Edit from './components/Edit';
 import Add from './components/Add';
 
+import MdChevronLeft from 'react-icons/lib/md/chevron-left';
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class App extends Component {
       editModal: {
         open: false,
       },
+      show: false,
     };
   }
 
@@ -83,6 +86,16 @@ class App extends Component {
     });
   }
 
+  handleShowContent = () => {
+    if (window.innerWidth < 421) {
+      this.setState({ show: true })
+    }
+  }
+
+  handleCloseContent = () => {
+    this.setState({ show: false })
+  }
+
   render() {
     const {
       isLoading,
@@ -106,10 +119,20 @@ class App extends Component {
                   Adicionar
                 </button>
               </div>
-              <NoteList notes={notes} />
+              <NoteList
+                notes={notes}
+                clickSelect={this.handleShowContent}
+              />
             </div>
-          <div className="content">
+          <div className={`content ${this.state.show ? 'over': ''}`}>
             <Route path="/notes/:id">
+              {window.innerWidth < 421 &&
+                <div className="header-content">
+                  <button onClick={this.handleCloseContent}>
+                    <MdChevronLeft /> Voltar
+                  </button>
+                </div>
+              }
               <NotesContent
                 funcOpenEdit={this.handleOpenEditModal}
               />
@@ -119,7 +142,7 @@ class App extends Component {
         {editModal.open &&
           <Edit
             id={editModal.id}
-            handleCloseButton={this.handleCloseEditModal}
+            handleCloseButton={this.handleShowContent}
             getData={this.getData}
           />
           }

@@ -9,7 +9,7 @@ export default class NoteList extends Component {
     return(
       <div className="notes">
         {this.props.notes.map((n, i) => {
-          return (<NavLink key={n._id} className="notes__item" to={`/notes/${n._id}`}>
+          return (<NavLink key={n._id} className="notes__item" to={`/notes/${n._id}`} onClick={this.props.clickSelect}>
             <div className="notes__inner">
               {n.title ? <h2>{n.title}</h2> : <h2 className="muted">Sem título</h2>}
               {n.text ? <p>{n.text.substr(0, 76)}</p> : null}
@@ -24,4 +24,5 @@ export default class NoteList extends Component {
 
 NoteList.propTypes = {
   notes: PropTypes.array.isRequired,
+  clickSelect: PropTypes.func.isRequired,
 };

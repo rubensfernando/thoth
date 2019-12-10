@@ -2,6 +2,10 @@ $font-sans: 'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto'
 $gray-500: #ccc;
 $gray-100: rgb(230, 230, 230);
 
+.root {
+  width: 100%;
+  overflow-x: hidden;
+}
 
 .launchScreen {
   width: 100vw;
@@ -68,9 +72,22 @@ $gray-100: rgb(230, 230, 230);
   }
   .content {
     width: 100vw;
+    background: #fff;
+    min-height: 100vh;
     @media screen and (min-width: 420px) {
       width: 66vw;
     }
+    @media screen and (max-width: 420px) {
+      transform: translateX(101%);
+      transition: all 1s;
+    }
+    &.over{
+      @media screen and (max-width: 420px) {
+        position: absolute;
+        transform: translateX(0);
+        transition: all 1s;
+      }
+    } 
   }
 }
 
@@ -255,6 +272,34 @@ $gray-100: rgb(230, 230, 230);
 
 .muted {
   color: #777;
+}
+
+@media screen and (max-width: 420px) {
+  .noteContent-enter {
+    opacity: 0;
+  }
+  .noteContent-enter-active {
+    opacity: 1;
+    transition: opacity 200ms;
+  }
+  .noteContent-exit {
+    opacity: 1;
+  }
+  .noteContent-exit-active {
+    opacity: 0;
+    transition: opacity 200ms;
+  }
+}
+
+.header-content {
+  height: 45px;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0;
+  box-sizing: border-box;
+  button {
+    font-weight: bold;
+    color: #EA6B5E;
+  }
 }
 
 @import 'datepicker';
