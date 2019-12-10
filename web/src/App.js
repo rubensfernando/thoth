@@ -35,7 +35,11 @@ class App extends Component {
   }
 
   getData = async (termSearch) => {
-    await axios.get(`//localhost:3003/api/notes`)
+    let url = `//localhost:3003/api/notes`;
+    if (termSearch) {
+      url = `//localhost:3003/api/notes?query=${termSearch}`;
+    }
+    await axios.get(url)
       .then(({ data }) => {
         console.log('response', data);
         this.setState({

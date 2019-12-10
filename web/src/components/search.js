@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 export default class SearchForm extends Component {
   handleChange = ({ target }) => {
-    if (target.value.length >= 3) {
+    if (target.value.length > 2) {
       console.log('you', target.value);
       this.props.getData(target.value);
-    } else if (target.value === '') {
+    } else {
       this.props.getData();
     }
   }

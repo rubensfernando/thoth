@@ -5,18 +5,25 @@ const notesModel = require('../models/notes');
 
 module.exports = {
   list: async (req, res) => {
-    const query = {};
+    let query = {};
+    console.log('query', req.query)
+    if (req.query.query) {
+      const querySplit = req.query.query
+        .split(' ')
+        .join('|')
+        .replace(/https|http|:\/\/|\/\/|www\./gi, '');
+      
+      const regexOpt = 'i';
 
-    if (req.query) {
-      Object.keys(req.query).forEach((q) => {
-        if (req.query[q] !== '') {
-          let value = req.query[q];
-          if (value === 'true' || value === 'false') {
-            value = value === 'true';
-          }
-          query[q] = req.query[q];
-        }
-      });
+      query = {
+        $or: [
+          { title: { $regex: querySplit, $options: regexOpt } },
+          { type: { $regex: querySplit, $options: regexOpt } },
+          { place: { $regex: querySplit, $options: regexOpt } },
+          { text: { $regex: querySplit, $options: regexOpt } },
+        ],
+      };
+  
     }
 
     const notes = await notesModel
