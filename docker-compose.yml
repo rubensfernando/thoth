@@ -1,19 +1,6 @@
 version: '3'
 
 services: 
-  mongo:
-    image: mongo
-    container_name: mongo
-    # environment:
-    #   MONGO_INITDB_ROOT_USERNAME: root
-    #   MONGO_INITDB_ROOT_PASSWORD: MongoDB!2020
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./db:/data/db
-    networks:
-      - mongo-compose-network
-
   api:
     build: .
     volumes:
@@ -22,8 +9,28 @@ services:
       - "3003:3003"
     depends_on:
       - mongo
-    links:
+    # links:
+    #   - mongo
+    networks:
+      - mongo-compose-network
+
+  client:
+    build: .
+    volumes:
+      - "./web:/app"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
       - mongo
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./db:/data/db
     networks:
       - mongo-compose-network
 
