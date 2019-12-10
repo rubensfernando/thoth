@@ -417,4 +417,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+db
+
 # End of https://www.gitignore.io/api/node,sass,react,linux,macos,stylus,windows,reactnative,visualstudiocode
