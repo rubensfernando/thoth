@@ -7,12 +7,21 @@ const notesRoute = require('./routes/notes');
 
 const app = express();
 
-mongoose.connect(
-  `mongodb://mongo:27017/thoth`,
-  {
-    useNewUrlParser: true,
-  },
-);
+
+const connectWithRetry = function () {
+  return mongoose.connect(
+    `mongodb://mongo:27017/thoth`,
+    {
+      useNewUrlParser: true,
+    }, function (err) {
+      if (err) {
+        console.error('Failed to connect to mongo on startup - retrying in 5 sec', err);
+        setTimeout(connectWithRetry, 5000);
+      }
+  });
+};
+connectWithRetry();
+
 mongoose.Promise = global.Promise;
 
 const db = mongoose.connection;
