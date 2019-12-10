@@ -13,7 +13,7 @@ export default class NoteList extends Component {
             <div className="notes__inner">
               {n.title ? <h2>{n.title}</h2> : <h2 className="muted">Sem título</h2>}
               {n.text ? <p>{n.text.substr(0, 76)}</p> : null}
-              <p className="notes__date"><p>{moment(n.date).format('DD/MM/YY')}</p></p>
+              <p className="notes__date">{moment(n.date).format('DD/MM/YY')}</p>
             </div>
           </NavLink>);
         })}

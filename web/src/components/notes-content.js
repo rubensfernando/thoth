@@ -4,6 +4,8 @@ import { withRouter } from "react-router";
 import axios from "axios";
 import moment from "moment";
 
+import MdDateRange from 'react-icons/lib/md/date-range';
+
 
 class NotesContent extends Component {
   constructor(props) {
@@ -61,10 +63,10 @@ class NotesContent extends Component {
         <header>
           {data.title ? <h1>{data.title}</h1> : <h1 className="muted">Sem título</h1>}
           <div className="toolbar">
-            <p>{moment(data.date).format('DD/MM/YY')}</p>
+            <p><MdDateRange />  {moment(data.date).format('DD/MM/YY')}</p>
             <div className="toolbar__actions">
               <button onClick={() => this.handleEditClick(this.props.match.params.id) }><i></i> Editar</button>
-              <button onClick={this.handleDeleteClick}><i></i> Excluir</button>
+              {/* <button onClick={this.handleDeleteClick}><i></i> Excluir</button> */}
             </div>
           </div>
         </header>
