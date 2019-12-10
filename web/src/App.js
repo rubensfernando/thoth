@@ -142,7 +142,7 @@ class App extends Component {
         {editModal.open &&
           <Edit
             id={editModal.id}
-            handleCloseButton={this.handleShowContent}
+            handleCloseButton={this.handleCloseEditModal}
             getData={this.getData}
           />
           }

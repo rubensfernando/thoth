@@ -5,6 +5,8 @@ import axios from "axios";
 import moment from "moment";
 
 import MdDateRange from 'react-icons/lib/md/date-range';
+import MdPlace from 'react-icons/lib/md/place';
+import MdFormatListBulleted from 'react-icons/lib/md/format-list-bulleted';
 
 
 class NotesContent extends Component {
@@ -64,6 +66,8 @@ class NotesContent extends Component {
           {data.title ? <h1>{data.title}</h1> : <h1 className="muted">Sem título</h1>}
           <div className="toolbar">
             <p><MdDateRange />  {moment(data.date).format('DD/MM/YY')}</p>
+            <p><MdPlace />  {data.place}</p>
+            <p><MdFormatListBulleted />  {data.type || 'Não informado'}</p>
             <div className="toolbar__actions">
               <button onClick={() => this.handleEditClick(this.props.match.params.id) }><i></i> Editar</button>
               {/* <button onClick={this.handleDeleteClick}><i></i> Excluir</button> */}
