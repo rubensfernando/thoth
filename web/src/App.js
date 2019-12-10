@@ -133,7 +133,7 @@ class App extends Component {
             <Route path="/notes/:id">
               {window.innerWidth < 421 &&
                 <div className="header-content">
-                  <button onClick={this.handleCloseContent}>
+                  <button className="button" onClick={this.handleCloseContent}>
                     <MdChevronLeft /> Voltar
                   </button>
                 </div>

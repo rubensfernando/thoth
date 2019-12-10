@@ -82,13 +82,13 @@ $gray-100: rgb(230, 230, 230);
     }
     @media screen and (max-width: 420px) {
       transform: translateX(101%);
-      transition: all 1s;
+      transition: all .5s;
     }
     &.over{
       @media screen and (max-width: 420px) {
         position: absolute;
         transform: translateX(0);
-        transition: all 1s;
+        transition: all .5s;
       }
     } 
   }
@@ -147,7 +147,12 @@ $gray-100: rgb(230, 230, 230);
 .toolbar {
   display: flex;
   justify-content: space-between;
-  .toolbar__actions {
+  flex-flow: column;
+  @media screen and (min-width: 420px) {
+    flex-flow: row;
+  }
+  p {
+    margin: .2em 0;
   }
 }
 
@@ -263,6 +268,8 @@ $gray-100: rgb(230, 230, 230);
   border-radius: 5px;
   font-size: 14px;
   font-family: $font-sans;
+  border: none;
+  background: transparent;
   &__add {
     margin: 0 25px;
   }
