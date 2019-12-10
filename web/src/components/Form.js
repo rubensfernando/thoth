@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 
 const initialState = {
   date: new Date(),
@@ -66,6 +66,7 @@ export default class NoteForm extends Component {
             timeIntervals={15}
             timeCaption="Horário"
             dateFormat="dd/MM/yyyy - HH:mm"
+            className="form__date"
           />
         </div>
         <div>
@@ -79,12 +80,11 @@ export default class NoteForm extends Component {
         </div>
         <div>
           <i className="icon calendar" />
-          <input
-            className="form__place"
-            placeholder="Coloque o título aqui"
-            value={this.state.place}
-            onChange={this.handleChange('place')} 
-          />
+          <select className="form__type">
+            <option></option>
+            <option>Descoberta</option>
+            <option>Anotação</option>
+          </select>
         </div>
         <div>
           <i className="icon calendar" />
@@ -107,7 +107,7 @@ export default class NoteForm extends Component {
         <div>
           <textarea
             className="form__text"
-            placeholder="Coloque o título aqui"
+            placeholder="Digite o texto aqui..."
             value={this.state.text}
             onChange={this.handleChange('text')} 
           />
@@ -120,5 +120,6 @@ export default class NoteForm extends Component {
 
 NoteForm.propTypes = {
   updateData: PropTypes.func.isRequired,
+  errors: PropTypes.object,
 };
 

@@ -10,46 +10,35 @@ class Edit extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: true,
+      isLoading: false,
       error: {},
     }
   }
 
-  componentDidMount() {
-    console.log('edit', this.props.id);
-    axios.get(`//localhost:3003/api/notes/${this.props.id}`)
-      .then(({ data }) => {
-        this.setState({
-          isLoading: false,
-          data,
-          id: this.props.id,
-        })
-      });
-  }
   updateData = (data) => {
     this.setState({data})
   }
 
-  handleUpdateNote = () => {
+  handleAddNote = () => {
     let { error } = this.state;
     error = {};
     if (!this.state.data.title || !this.state.data.text) {
       if (!this.state.data.title) {
-        error.title = 'Campo deve ser preenchido.' 
+        error.title = 'Campo deve ser preenchido.'
       }
       if (!this.state.data.text) {
         error.text = 'Campo deve ser preenchido.'
       }
-      
+
     } else {
-      axios.put(`//localhost:3003/api/notes/${this.props.id}`, 
+      axios.post(`//localhost:3003/api/notes`, 
         this.state.data,
       )
-      .then((response) => {
-        console.log(response);
+      .then(({data}) => {
+        // console.log(response);
         this.props.handleCloseButton(() => {
           this.props.getData();
-          this.props.history.push(`/notes/${this.props.id}`)
+          this.props.history.push(`/notes/${data._id}`)
         });
       })
       .catch((response) => {
@@ -68,9 +57,9 @@ class Edit extends Component {
         {!isLoading &&
           <React.Fragment>
             <Modal
-            funcSubmit={this.handleUpdateNote}
+            funcSubmit={this.handleAddNote}
             funcCancel={this.props.handleCloseButton}
-            labelSubmit="Salvar"
+            labelSubmit="Adicionar"
             labelCancel="Cancelar"
             >
               <NoteForm

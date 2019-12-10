@@ -8,6 +8,7 @@ import NoteList from './components/notes-list';
 import SearchForm from './components/search';
 import NotesContent from './components/notes-content';
 import Edit from './components/Edit';
+import Add from './components/Add';
 
 
 class App extends Component {
@@ -40,7 +41,7 @@ class App extends Component {
       })
   }
 
-  openEditModal = (id) => {
+  handleOpenEditModal = (id) => {
     this.setState({
       editModal: {
         open: true,
@@ -62,9 +63,30 @@ class App extends Component {
     });
   }
 
+  handleOpenAddModal = () => {
+    this.setState({
+      addModal: {
+        open: true,
+      }
+    });
+  }
+
+  handleCloseAddModal = (callback) => {
+    this.setState({
+      addModal: {
+        open: false,
+      }
+    }, () => {
+      if (callback && typeof callback === 'function') {
+        callback();
+      }
+    });
+  }
+
   render() {
     const {
       isLoading,
+      addModal,
       editModal,
       notes,
     } = this.state;
@@ -76,13 +98,20 @@ class App extends Component {
             <div className="sidebar">
               <div className="header">
                 <SearchForm getData={this.getData} />
+                <button
+                className="button button__add button__primary large"
+                  onClick={this.handleOpenAddModal}
+                >
+                  <i className="icon plus"></i>
+                  Adicionar
+                </button>
               </div>
               <NoteList notes={notes} />
             </div>
           <div className="content">
             <Route path="/notes/:id">
               <NotesContent
-                funcOpenEdit={this.openEditModal}
+                funcOpenEdit={this.handleOpenEditModal}
               />
             </Route>
           </div>
@@ -91,6 +120,12 @@ class App extends Component {
           <Edit
             id={editModal.id}
             handleCloseButton={this.handleCloseEditModal}
+            getData={this.getData}
+          />
+          }
+        {addModal.open &&
+          <Add
+            handleCloseButton={this.handleCloseAddModal}
             getData={this.getData}
           />
           }

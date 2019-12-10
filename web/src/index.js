@@ -2,10 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import './scss/index.scss';
-// import rootReducer from './reducers'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 
 
 
