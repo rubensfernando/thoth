@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from "moment";
 import { NavLink } from 'react-router-dom';
 
 
@@ -11,9 +12,8 @@ export default class NoteList extends Component {
           return (<NavLink key={n._id} className="notes__item" to={`/notes/${n._id}`}>
             <div className="notes__inner">
               <h2>{n.title}</h2>
-
               {n.text ? <p>{n.text.substr(0, 76)}</p> : null}
-              <p className="notes__date">{n.date}</p>
+              <p className="notes__date"><p>{moment(n.date).format('DD/MM/YY')}</p></p>
             </div>
           </NavLink>);
         })}
