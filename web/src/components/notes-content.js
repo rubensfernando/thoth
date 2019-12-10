@@ -65,11 +65,11 @@ class NotesContent extends Component {
         <header>
           {data.title ? <h1>{data.title}</h1> : <h1 className="muted">Sem título</h1>}
           <div className="toolbar">
-            <p><MdDateRange />  {moment(data.date).format('DD/MM/YY')}</p>
-            <p><MdPlace />  {data.place}</p>
+            <p><MdDateRange />  {moment(data.date).format('DD/MM/YY [ás] HH:mm')}</p>
+            {data.place && <p><MdPlace />  {data.place}</p>}
             <p><MdFormatListBulleted />  {data.type || 'Não informado'}</p>
             <div className="toolbar__actions">
-              <button onClick={() => this.handleEditClick(this.props.match.params.id) }><i></i> Editar</button>
+              <button className="button button__secondary" onClick={() => this.handleEditClick(this.props.match.params.id) }><i></i> Editar</button>
               {/* <button onClick={this.handleDeleteClick}><i></i> Excluir</button> */}
             </div>
           </div>

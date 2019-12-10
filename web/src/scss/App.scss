@@ -74,6 +74,9 @@ $gray-100: rgb(230, 230, 230);
     width: 100vw;
     background: #fff;
     min-height: 100vh;
+    p {
+      line-height: 1.5;
+    }
     @media screen and (min-width: 420px) {
       width: 66vw;
     }
@@ -117,6 +120,9 @@ $gray-100: rgb(230, 230, 230);
     margin-top: .5em;
     font-size: .7em;
   }
+  .notes__type {
+    font-size: .7em;
+  }
   h2 {
     font-size: 16px;
     margin-bottom: 0;
@@ -142,10 +148,6 @@ $gray-100: rgb(230, 230, 230);
   display: flex;
   justify-content: space-between;
   .toolbar__actions {
-    button {
-      border: 1px solid red;
-      padding: 5px 10px;
-    }
   }
 }
 
@@ -234,12 +236,24 @@ $gray-100: rgb(230, 230, 230);
     padding: .3em 0;
     width: 100%;
   }
+  &__group {
+    width: 100%;
+    margin: .5em 1em 0 0;
+  }
   &__title {
     font-size: 30px !important;
     font-weight: bold;
   }
   &__text {
     height: 30vh;
+  }
+  &__second {
+    display: flex;
+  }
+  &__label {
+    font-size: .75em;
+    color: #777;
+    display: block;
   }
 }
 
@@ -259,6 +273,7 @@ $gray-100: rgb(230, 230, 230);
     color: white;
   }
   &__secondary {
+    background: white;
     border: 1px solid #EA6B5E;
     color: #EA6B5E;
   }

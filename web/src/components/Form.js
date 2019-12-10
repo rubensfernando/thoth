@@ -45,69 +45,63 @@ export default class NoteForm extends Component {
     }
   }
 
+  changeType = (event) => {
+    console.log('event', event);
+  } 
+
   render() {
     return(
       <div className="form">
-        <div>
-          <input
-            className="form__title"
-            placeholder="Coloque o título aqui"
-            value={this.state.title}
-            onChange={this.handleChange('title')} 
-          />
-        </div>
-        <div>
-          <i className="icon calendar" />
-          <DatePicker
-            selected={moment(this.state.date).toDate()}
-            onChange={date => this.setDate(date)}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            timeCaption="Horário"
-            dateFormat="dd/MM/yyyy - HH:mm"
-            className="form__date"
-          />
-        </div>
-        <div>
-          <i className="icon calendar" />
-          <input
+        <div className="form__group">
+          <label className="form__label">Tipo</label>
+          <select
             className="form__type"
-            placeholder="Coloque o título aqui"
+            onChange={this.handleChange('type')}
             value={this.state.type}
-            onChange={this.handleChange('type')} 
-        />
-        </div>
-        <div>
-          <i className="icon calendar" />
-          <select className="form__type">
-            <option></option>
+          >
+            <option defaultValue>Escolha uma categoria</option>
             <option>Descoberta</option>
             <option>Anotação</option>
           </select>
         </div>
-        <div>
-          <i className="icon calendar" />
+        <div className="form__group">
           <input
-            className="form__lat"
-            placeholder="Coloque o título aqui"
-            value={this.state.latLng.lat}
-            onChange={this.handleChange('lat')} 
+            className="form__title"
+            placeholder={this.state.type === 'Descoberta' ? 'O que você encontrou?' : 'Coloque o título aqui'}
+            value={this.state.title}
+            onChange={this.handleChange('title')} 
           />
         </div>
-        <div>
-          <i className="icon calendar" />
-          <input
-            className="form__lng"
-            placeholder="Coloque o título aqui"
-            value={this.state.latLng.lng}
-            onChange={this.handleChange('lng')} 
+        <div className="form__second">
+          <div className="form__group">
+            <label className="form__label">Data e hora</label>
+            <DatePicker
+              selected={moment(this.state.date).toDate()}
+              onChange={date => this.setDate(date)}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              timeCaption="Horário"
+              dateFormat="dd/MM/yyyy - HH:mm"
+              className="form__date"
+            />
+          </div>
+          <div className="form__group">
+            <label className="form__label">{this.state.type === 'Descoberta' ? 'Onde encontrou?' : 'Local'}</label>
+            <input
+              className="form__place"
+              placeholder="Local"
+              value={this.state.place}
+              onChange={this.handleChange('place')} 
           />
+          </div>
         </div>
-        <div>
+        
+        <div className="form__group">
+          <label className="form__label">{this.state.type === 'Descoberta' ? 'Como era?' : 'Anotações'}</label>
           <textarea
             className="form__text"
-            placeholder="Digite o texto aqui..."
+            placeholder="Digite aqui..."
             value={this.state.text}
             onChange={this.handleChange('text')} 
           />

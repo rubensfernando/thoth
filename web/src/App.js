@@ -12,6 +12,7 @@ import Edit from './components/Edit';
 import Add from './components/Add';
 
 import MdChevronLeft from 'react-icons/lib/md/chevron-left';
+import MdAdd from 'react-icons/lib/md/add';
 
 class App extends Component {
   constructor(props) {
@@ -115,7 +116,7 @@ class App extends Component {
                 className="button button__add button__primary large"
                   onClick={this.handleOpenAddModal}
                 >
-                  <i className="icon plus"></i>
+                  <MdAdd />
                   Adicionar
                 </button>
               </div>
