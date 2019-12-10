@@ -1,0 +1,102 @@
+$gray-500: #ccc;
+$gray-100: rgb(230, 230, 230);
+
+
+.launchScreen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F4E19F;
+  text-align: center;
+  .brand {
+    max-width: 30%;
+    min-width: 250px;
+    h1 {
+      font-size: 5em;
+      line-height: 0;
+    }
+  }
+}
+
+
+.search {
+  background: rgba(0,0,0,.1);
+  border-radius: 15px;
+  width: 75%;
+  display: flex;
+  margin: 15px 25px;
+  i {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+  }
+  input {
+    width: calc(100% - 60px);
+    height: 30px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  // max-width: 940px;
+  margin: 0 auto;
+  display: flex;
+  .sidebar {
+    width: 100%;
+    .header {
+      height: 50px;
+      @media screen and (min-width: 420px) {
+        height: 75px;
+      }
+    }
+    @media screen and (min-width: 420px) {
+      width: 33%;
+      height: 100vh;
+      background: $gray-100;
+      border-right: 1px solid $gray-500;
+    }
+  }
+  .content {
+    width: 100%;
+    @media screen and (min-width: 420px) {
+      width: 66%;
+    }
+  }
+}
+
+
+.notes {
+  height: calc(100vh - 50px);
+  overflow-y: auto;
+  font-size: 16px;
+  text-decoration: none;
+  @media screen and (min-width: 420px) {
+    height: calc(100vh - 75px);
+  }
+  .notes__item {
+    width: 100%;
+    display: block;
+    &.active {
+      background: rgba(0,0,0,.05)
+    }
+  }
+  .notes__inner {
+    border-bottom: 1px solid $gray-500;
+    padding: 15px 25px;
+    color: #333;
+  }
+  .notes__date {
+    color: rgb(166, 166, 166);
+    margin-top: .5em;
+    font-size: .7em;
+  }
+  h2 {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+}
