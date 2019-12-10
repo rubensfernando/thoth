@@ -1,3 +1,4 @@
+$font-sans: 'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen','Ubuntu', 'Cantarell', 'Fira Sans', 'Helvetica Neue', sans-serif;
 $gray-500: #ccc;
 $gray-100: rgb(230, 230, 230);
 
@@ -42,29 +43,33 @@ $gray-100: rgb(230, 230, 230);
 }
 
 .wrapper {
-  width: 100%;
+  width: 200%;
   // max-width: 940px;
   margin: 0 auto;
   display: flex;
-  .sidebar {
+  @media screen and (min-width: 420px) {
     width: 100%;
+  }
+  .sidebar {
+    width: 100vw;
+    background: $gray-100;
     .header {
-      height: 50px;
+      margin: 0 0 1em 0;
+      // height: 50px;
       @media screen and (min-width: 420px) {
-        height: 75px;
+        // height: 75px;
       }
     }
     @media screen and (min-width: 420px) {
-      width: 33%;
+      width: 33vw;
       height: 100vh;
-      background: $gray-100;
       border-right: 1px solid $gray-500;
     }
   }
   .content {
-    width: 100%;
+    width: 100vw;
     @media screen and (min-width: 420px) {
-      width: 66%;
+      width: 66vw;
     }
   }
 }
@@ -100,3 +105,156 @@ $gray-100: rgb(230, 230, 230);
     margin-bottom: 0;
   }
 }
+
+.note-show {
+  width: 100%;
+  h1 {
+    font-size: 30px;
+  }
+  header {
+    border-bottom: 1px solid $gray-500;
+    padding: 15px 25px;
+  }
+  .text {
+    padding: 15px 25px;
+  }
+}
+
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  .toolbar__actions {
+    button {
+      border: 1px solid red;
+      padding: 5px 10px;
+    }
+  }
+}
+
+
+.modal {
+  max-width: 940px;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  transition: 1.1s ease-out;
+  box-shadow: -2rem 2rem 2rem rgba(0, 0, 0, 0.2);
+  filter: blur(0);
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+  top: 5em;
+  left: 50%;
+  transform: translateX(-50%);
+
+  &.off {
+    opacity: 0;
+    visibility: hidden;
+    filter: blur(8px);
+    transform: scale(0.33);
+    box-shadow: 1rem 0 0 rgba(0, 0, 0, 0.2);
+  }
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.2);
+}
+
+  h2 {
+    border-bottom: 1px solid #ccc;
+    padding: 1rem;
+    margin: 0;
+  }
+
+  .modal__content {
+    padding: 15px 25px;
+  }
+
+  .actions {
+    border-top: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@supports (offset-rotation: 0deg) {
+  offset-rotation: 0deg;
+  offset-path: path("M 250,100 S -300,500 -700,-200");
+
+  .modal.off {
+    offset-distance: 100%;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .modal {
+    offset-path: none;
+  }
+}
+
+#centered-toggle-button {
+  position: absolute;
+}
+
+.form {
+  input,
+  textarea,
+  select,
+  .form__date {
+    background: #fff;
+    border: none;
+    border-bottom: 1px solid $gray-100;
+    font-family: $font-sans;
+    font-size: 16px;
+    margin: 0 0 .5em 0;
+    padding: .3em 0;
+    width: 100%;
+  }
+  &__title {
+    font-size: 30px !important;
+    font-weight: bold;
+  }
+  &__text {
+    height: 30vh;
+  }
+}
+
+
+.button {
+  padding: 5px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: $font-sans;
+  &__add {
+    margin: 0 25px;
+  }
+  &__primary {
+    background: #EA6B5E;
+    border: 1px solid #EA6B5E;
+    // font-weight: bold;
+    color: white;
+  }
+  &__secondary {
+    border: 1px solid #EA6B5E;
+    color: #EA6B5E;
+  }
+  &.large {
+    font-size: 1em;
+  }
+}
+.button + .button {
+  margin: 0 0 0 1em;
+}
+
+.muted {
+  color: #777;
+}
+
+@import 'datepicker';
