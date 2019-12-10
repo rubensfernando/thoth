@@ -41,7 +41,11 @@ class NotesContent extends Component {
     }
   }
 
-  handleEditClick = () => {
+  handleEditClick = (id) => {
+    this.props.funcOpenEdit(id);
+  }
+
+  handleDeteClick = (id) => {
     console.log('editar');
   }
 
@@ -59,12 +63,16 @@ class NotesContent extends Component {
           <div className="toolbar">
             <p>{moment(data.date).format('DD/MM/YY')}</p>
             <div className="toolbar__actions">
-              <button onClick={this.handleEditClick}><i></i> Editar</button>
-              <button onClick={this.handleEditClick}><i></i> Excluir</button>
+              <button onClick={() => this.handleEditClick(this.props.match.params.id) }><i></i> Editar</button>
+              <button onClick={this.handleDeleteClick}><i></i> Excluir</button>
             </div>
           </div>
         </header>
-        <div className="text" dangerouslySetInnerHTML={{ __html: data.text }}></div>
+        <div className="text">
+          {data.text.split('\n').map((item, key) => {
+            return <p key={key}>{item}<br /></p>
+          })}
+        </div>
       </div>
     );
   }
@@ -73,7 +81,8 @@ class NotesContent extends Component {
 NotesContent.propTypes = {
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  funcOpenEdit: PropTypes.func.isRequired,
 };
 
 export default withRouter(NotesContent);

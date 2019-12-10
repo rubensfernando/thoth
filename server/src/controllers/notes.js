@@ -48,5 +48,56 @@ module.exports = {
       }
       return res.status(201).json(notes);
     });
-},
+  },
+  show: async (req, res) => {
+    var id = req.params.id;
+    notesModel.findOne({ _id: id }, function (err, note) {
+      if (err) {
+        return res.status(500).json({
+          message: 'Error when getting note.',
+          error: err
+        });
+      }
+      if (!note) {
+        return res.status(404).json({
+          message: 'No such note'
+        });
+      }
+      return res.json(note);
+    });
+  },
+  update: async (req, res) => {
+    var id = req.params.id;
+    notesModel.findOne({ _id: id }, function (err, note) {
+      if (err) {
+        return res.status(500).json({
+          message: 'Error when getting note',
+          error: err
+        });
+      }
+      if (!note) {
+        return res.status(404).json({
+          message: 'No such note'
+        });
+      }
+
+      note.date = req.body.date ? req.body.date : note.date;
+      note.title = req.body.title ? req.body.title : note.title;
+      note.type = req.body.type ? req.body.type : note.type;
+      note.place = req.body.place ? req.body.place : note.place;
+      note.text = req.body.text ? req.body.text : note.text;
+      note.latLng = req.body.latLng ? req.body.latLng : note.latLng;
+
+      note.save(function (err, note) {
+        if (err) {
+          return res.status(500).json({
+            message: 'Error when updating note.',
+            error: err
+          });
+        }
+
+        return res.status(200).json(note);
+      });
+    });
+  },
 };

@@ -10,7 +10,7 @@ router.get('/', notesController.list);
 // /*
 //  * GET
 //  */
-// router.get('/:id', notesController.show);
+router.get('/:id', notesController.show);
 
 // /*
 //  * POST
@@ -20,7 +20,7 @@ router.post('/', notesController.create);
 // /*
 //  * PUT
 //  */
-// router.put('/:id', notesController.update);
+router.put('/:id', notesController.update);
 
 // /*
 //  * DELETE
