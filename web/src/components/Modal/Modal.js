@@ -17,10 +17,10 @@ export default class Modal extends Component {
             {this.props.children}
           </div>
           <div className="actions">
-            <button className="toggle-button" onClick={this.onClose}>
+            <button className="button button__secondary" onClick={this.onClose}>
               {this.props.labelCancel}
             </button>
-            <button className="toggle-button" onClick={this.onSubmit}>
+            <button className="button button__primary" onClick={this.onSubmit}>
               {this.props.labelSubmit}
             </button>
           </div>

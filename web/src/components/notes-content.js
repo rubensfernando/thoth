@@ -59,7 +59,7 @@ class NotesContent extends Component {
     return(
       <div className="note-show">
         <header>
-          <h1>{data.title}</h1>
+          {data.title ? <h1>{data.title}</h1> : <h1 className="muted">Sem título</h1>}
           <div className="toolbar">
             <p>{moment(data.date).format('DD/MM/YY')}</p>
             <div className="toolbar__actions">
@@ -69,7 +69,7 @@ class NotesContent extends Component {
           </div>
         </header>
         <div className="text">
-          {data.text.split('\n').map((item, key) => {
+          {data.text && data.text.split('\n').map((item, key) => {
             return <p key={key}>{item}<br /></p>
           })}
         </div>
